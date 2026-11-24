@@ -1,0 +1,168 @@
+# MSW Backend
+
+This repository contains the backend code for the **MSW** project, which manages student data and integrates with the frontend to provide a seamless experience for users. The backend is built using modern technologies, ensuring scalability, reliability, and ease of development.
+
+## Tech Stack
+
+The following technologies are used in the backend:
+
+- **Node.js**: JavaScript runtime for building the backend server.
+- **Express.js**: Web framework for creating RESTful APIs.
+- **MongoDB**: NoSQL database for storing application data.
+- **Mongoose**: ODM for MongoDB, providing schema validation and data modeling.
+- **Axios**: For server-to-server HTTP requests (if applicable).
+- **Dotenv**: For environment variable management.
+
+## Setup Instructions
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- **Node.js** (version 16.x or higher)
+- **npm** (comes with Node.js) or **Yarn**
+- **MongoDB** (local or cloud-based)
+
+### Installation
+
+1. Clone this repository:
+
+    ```bash
+    git clone https://github.com/YOUR-USERNAME/msw-backend.git
+    cd msw-backend
+    ```
+
+2. Install dependencies:
+
+    For **npm**:
+
+    ```bash
+    npm install
+    ```
+
+    Or, if you're using **Yarn**:
+
+    ```bash
+    yarn install
+    ```
+
+3. Create a `.env` file in the root directory and configure the following variables:
+
+    ```bash
+    npm add dot env
+    ```
+
+    ```env
+	NODE_ENV=development
+	PORT= ADD_YOUR_BACKEND_PORT
+	USERNAME= YOUR_USERNAME
+	DATABASE_PASSWORD= YOUR_PASSWORD
+	PASSWORD_SALT=12
+	JWT_SECRET= ADD_YOUR_JWT_SECRET_KEY
+	JWT_EXPIRES_IN=90d
+	JWT_COOKIE_EXPIRES_IN=90
+	EMAIL_USER= USER_EMAIL
+	EMAIL_PASS= USER_PASSWORD
+	EMAIL_HOST=smtp.mailtrap.io
+	EMAIL_PORT= EMAIL_PORT
+	CLIENT_HOST=http://localhost:5173
+	MONGODB_URI= YOUR_MONGODB_URI
+	SUPABASE_PRIVATE_KEY= YOUR_SUPABASE_KEY
+	SUPABASE_URL= YOUR_SUPABASE_URL
+	PYTHON_API= http://localhost:8080
+	GOOGLE_GEMINI_API_KEY= YOUR_GEMINI_API_KEY
+    ```
+
+4. Start the server in development mode:
+
+    For **npm**:
+
+    ```bash
+    npm run dev
+    ```
+
+    Or, with **Yarn**:
+
+    ```bash
+    yarn dev
+    ```
+
+The server will run at `http://localhost:8000` by default.
+
+## API Endpoints
+
+### Authentication
+
+- **POST** `/auth/login`: User login.
+
+## Folder Structure
+
+```bash
+msw-backend/
+│
+├── controllers/         # API route handlers
+├── models/              # Mongoose schemas and models
+├── routes/              # API route definitions
+├── middlewares/         # Middleware functions (e.g., auth)
+├── utils/               # Helper functions and utilities
+├── .env                 # Environment variables
+├── server.js            # Entry point for the application
+└── README.md            # Documentation
+```
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch:
+
+    ```bash
+    git checkout -b feature-name
+    ```
+
+3. Make your changes and commit:
+
+    ```bash
+    git commit -m "Add feature-name"
+    ```
+
+4. Push your branch and create a pull request.
+
+## To deploy in Production 
+
+1. Install flyctl
+
+    For windows:
+    Run command in powershell:
+    ```bash
+    iwr https://fly.io/install.ps1 -useb | iex
+    ```
+
+    In macos:
+    ```bash
+    brew install flyctl
+    ```
+
+    In linux:
+    ```bash
+    curl -L https://fly.io/install.sh | sh
+    ```
+
+2. TO create fly.toml
+    To create a new fly.toml file
+    ```bash
+    flyctl launch
+    ```
+    or
+
+    To download from the existing fly.toml file
+    ```bash
+    flyctl config save -a <existing-app-name>
+    ```
+
+3. To deploy production 
+    ```bash
+    fly deploy
+    ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE)
