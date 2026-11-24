@@ -1,5 +1,3 @@
-import logo from "../public/campus_logo.png";
-import sidelogo from "../../public/logo.svg";
 import {
   Box,
   Card,
@@ -24,9 +22,12 @@ import Page from "../components/Page";
 import { useSnackbar } from "notistack";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
-import Illustration from "../public/login_illustration.png";
-
 import logger from "../utils/logger.js";
+
+const logo = "/campus_logo.png";
+const sidelogo = "/logo.svg";
+const Illustration = new URL("../public/login_illustration.png", import.meta.url).href;
+
 const Login = () => {
   const RELEASE_ANNOUNCEMENT_SESSION_KEY = "showMsw20Announcement";
   const navigate = useNavigate();

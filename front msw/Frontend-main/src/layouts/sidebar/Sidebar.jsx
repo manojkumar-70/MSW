@@ -4,10 +4,11 @@ import getNavConfig from "./NavConfig";
 import SidebarDrawer from "./SidebarDrawer";
 import NavItemsList from "./NavItemsList";
 import FlexBetween from "../../components/FlexBetween";
-import logo from "../../public/logo.svg";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft } from "@mui/icons-material";
 import { AuthContext } from "../../context/AuthContext";
+
+const logo = "/logo.svg";
 
 const Sidebar = ({
   drawerWidth,
