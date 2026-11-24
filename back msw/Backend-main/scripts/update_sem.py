@@ -4,7 +4,7 @@ import os
 
 client = MongoClient(os.getenv("MONGO_URI"))
 
-db = client["cmrit_test"]
+db = client["msw_test"]
 
 collection = db["studentprofiles"]
 

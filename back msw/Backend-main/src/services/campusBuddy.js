@@ -14,18 +14,18 @@ class CampusBuddy {
       "good evening": "Good evening! What do you need?",
     };
 
-    // Set up CMRIT information for the AI assistant
-    this.initializeCMRITInfo();
+    // Set up campus information for the AI assistant
+    this.initializeCampusInfo();
     
     // Store the conversations
     this.conversations = {};
   }
 
-  initializeCMRITInfo() {
-    // CMRIT College Information
-    this.cmritInfo = {
+  initializeCampusInfo() {
+    // Campus information
+    this.campusInfo = {
       establishment:
-        "CMRIT was established in 2000 and is affiliated with VTU, Approved by AICTE, and accredited by NAAC with 'A+' grade",
+        "The institution was established in 2000 and is affiliated with VTU, approved by AICTE, and accredited by NAAC with 'A+' grade",
       location: "Bangalore, Karnataka, India",
       courses: [
         "Computer Science",
@@ -54,9 +54,9 @@ class CampusBuddy {
     };
 
     // MSW Platform Information
-    this.emithruInfo = {
+    this.platformInfo = {
       description:
-        "MSW is a digital mentoring platform at CMRIT designed to bridge the gap between students and mentors.",
+        "MSW is a digital mentoring platform designed to bridge the gap between students and mentors.",
       features: [
         "Personalized mentor assignment system",
         "Track student's academic and overall progress",
@@ -151,7 +151,7 @@ class CampusBuddy {
 
       console.log("Conversation text:", conversationText);
 
-      const summaryPrompt = `You are a conversation summarizer. Your task is to create a detailed summary of the following conversation between a user and the CMRIT Campus Buddy assistant. The summary must be between 40-80 words and must include:
+      const summaryPrompt = `You are a conversation summarizer. Your task is to create a detailed summary of the following conversation between a user and the MSW Campus Buddy assistant. The summary must be between 40-80 words and must include:
 
 1. The main topics discussed
 2. Key information shared

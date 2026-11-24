@@ -9,7 +9,7 @@ import { buildCanonicalUrl, toAbsoluteUrl } from "../utils/seo";
 
 const DEFAULT_TITLE = "MSW";
 const DEFAULT_DESCRIPTION =
-  "MSW is a mentoring and student success platform for CMRIT, built to streamline collaboration for students, faculty, and admins.";
+  "MSW is a student mentoring and success platform built to streamline collaboration for students, faculty, and admins.";
 
 const Page = forwardRef(
   (

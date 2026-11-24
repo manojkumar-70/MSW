@@ -18,7 +18,7 @@ export async function semanticSearch(queryText) {
   const pipeline = [
     {
       $vectorSearch: {
-        index: 'CMRIT_index',
+        index: 'msw_index',
         path:  'embedding',
         queryVector: embedding,
         limit:       20,

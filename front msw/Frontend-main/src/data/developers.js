@@ -5,7 +5,7 @@ export const developers = {
     role: "Full-StackEngineer",
     group: "others",
     github: "https://github.com/Kethanvr",
-    email: "kethan.ise24@cmrit.ac.in",
+    email: "developer@example.com",
     shortBio:
       "Architects, deploys, and scales production-grade full-stack AI systems end-to-end.",
   },
@@ -15,7 +15,7 @@ export const developers = {
     role: "Founder",
     group: "founders",
     github: "https://github.com/shovan-mondal",
-    email: "shmo23ise@cmrit.ac.in",
+    email: "founder@example.com",
     shortBio: "Core founding contributor of MSW.",
   },
   monu564100: {
@@ -24,7 +24,7 @@ export const developers = {
     role: "CoFounder",
     group: "founders",
     github: "https://github.com/monu564100",
-    email: "moku23ise@cmrit.ac.in",
+    email: "cofounder@example.com",
     shortBio: "Core founding contributor of MSW.",
   },
   "SUJAY-HK": {

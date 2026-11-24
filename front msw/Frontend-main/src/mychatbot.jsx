@@ -127,7 +127,7 @@ const MyChatBot = () => {
     get_department_location: {
       message: async (params) =>
         getRagResponse(
-          `For CMRIT, where is the ${params.userInput} department located on campus? Reply in 2-3 sentences.`
+          `Where is the ${params.userInput} department located on campus? Reply in 2-3 sentences.`
         ),
       path: "repeat",
     },
@@ -139,7 +139,7 @@ const MyChatBot = () => {
     get_vtu_exams: {
       message: async (params) =>
         getRagResponse(
-          `For CMRIT students, what is the latest information available for ${params.userInput} VTU examinations?`
+          `What is the latest information available for ${params.userInput} VTU examinations?`
         ),
       path: "repeat",
     },
@@ -150,7 +150,7 @@ const MyChatBot = () => {
     },
     get_iat_dates: {
       message: async (params) =>
-        getRagResponse(`For CMRIT, what is the date or schedule information for ${params.userInput}?`),
+        getRagResponse(`What is the date or schedule information for ${params.userInput}?`),
       path: "repeat",
     },
     ask_hod_department: {
@@ -161,7 +161,7 @@ const MyChatBot = () => {
     give_hod_info: {
       message: async (params) =>
         getRagResponse(
-          `For CMRIT, who is the HOD of ${params.userInput}? Include name and designation if available.`
+          `Who is the HOD of ${params.userInput}? Include name and designation if available.`
         ),
       path: "repeat",
     },

@@ -248,7 +248,7 @@ const AboutDevelopers = () => {
       description="Meet the developers behind MSW. Explore team roles, social profiles, and dedicated developer pages."
       canonicalPath="/about-developers"
       image="/developers/kethanvr.jpeg"
-      keywords="MSW developers, MSW team, CMRIT mentoring platform, full stack AI developer"
+      keywords="MSW developers, MSW team, student mentoring platform, full stack AI developer"
       structuredData={aboutDevelopersStructuredData}
     >
       <Box

@@ -40,7 +40,7 @@ const quickOptions = [
 ];
 
 const quickOptionPrompts = {
-  "Department Location": "For CMRIT, where is the department located on campus?",
+  "Department Location": "Where is the department located on campus?",
   "IAT dates": "What is the latest schedule information for the IAT exams?",
   "VTU Examinations": "What is the latest information available for VTU examinations?",
   "Department HOD": "Who is the HOD of this department? Include name and designation if available.",

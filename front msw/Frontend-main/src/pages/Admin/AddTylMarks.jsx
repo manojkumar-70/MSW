@@ -101,7 +101,7 @@ const AddTylMarks = () => {
       100, 100, 0, 0
     ];
     const exampleRow = [
-      1, "student@cmrit.ac.in", "AAMITH PRAMOD", "1CR23IS001", "9148164893", "ISE",
+      1, "student@example.com", "AAMITH PRAMOD", "1CR23IS001", "9148164893", "ISE",
 
     ];
     const csv = Papa.unparse([headers, TotalMarks, passingRow, exampleRow], { quotes: true });

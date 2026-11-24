@@ -1,4 +1,4 @@
-import logo from "../public/cmrit_logo.png";
+import logo from "../public/campus_logo.png";
 import sidelogo from "../../public/logo.svg";
 import {
   Box,
@@ -169,7 +169,7 @@ const Login = () => {
                     />
                     <img
                       src={logo}
-                      alt="CMRIT Logo"
+                      alt="MSW logo"
                       style={{
                         width: "clamp(62px, 20vw, 80px)",
                         filter: "none"

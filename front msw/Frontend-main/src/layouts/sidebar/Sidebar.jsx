@@ -50,7 +50,7 @@ const Sidebar = ({
           <Box display="flex" flexDirection="column" alignItems="center">
             <img
               src={logo}
-              alt="CMRIT Logo"
+              alt="MSW logo"
               style={{
                 filter: "none",
                 margin: isNonMobile ? "16px 5px" : "20px 8px",

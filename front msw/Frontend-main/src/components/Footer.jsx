@@ -149,7 +149,7 @@ const Footer = () => {
                 </Typography>
               </Stack>
               <Typography variant="body2" color="text.secondary">
-                Mentoring and student success platform for CMRIT.
+                Student mentoring and success platform.
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 {isDashboardRoute ? "Dashboard experience" : "Application experience"}

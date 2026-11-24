@@ -39,8 +39,8 @@ except Exception as e:
     sys.exit(1)
 
 # Auto-detect database name from URI or use default
-if '/cmrit' in MONGO_URI:
-    db_name = 'cmrit'
+if '/msw' in MONGO_URI:
+    db_name = 'msw'
 else:
     db_name = 'test'
 
