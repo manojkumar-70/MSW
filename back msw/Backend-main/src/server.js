@@ -5,7 +5,6 @@ import logger from "./utils/logger.js";
 import SocketManager from "./utils/socketManager.js";
 import socketController from "./controllers/socketController.js";
 import morganMiddleware from "./utils/morganMiddleware.js";
-import swaggerDocs from "./swagger.js"; // Import Swagger
 import { ragAnswer } from './rag.js';
 
 
@@ -69,9 +68,6 @@ process.on("unhandledRejection", (err) => {
     process.exit(1);
   });
 });
-// ✅ Apply Swagger Docs BEFORE the error-handling middleware
-swaggerDocs(app);
-
 app.all("*", (req, res, next) => {
   res.status(404).json({
     status: "fail",

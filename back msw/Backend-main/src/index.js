@@ -169,6 +169,8 @@ app.get('/test-upload', (req, res) => {
   }
 });
 
+swaggerDocs(app);
+
 // Handle non-existing routes
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
