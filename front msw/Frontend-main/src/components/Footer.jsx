@@ -16,8 +16,6 @@ import { buildBrandedMailto } from "../utils/mailto";
 const logo = "/apple-touch-icon.png";
 
 const commonLinks = [
-  { label: "Campus Buddy", to: "/campus-buddy" },
-  { label: "Threads", to: "/threads" },
   { label: "Settings", to: "/settings" },
 ];
 
@@ -25,7 +23,7 @@ const contactLinks = [
   { label: "About Developers", to: "/about-developers" },
 ];
 
-const SUPPORT_EMAIL = "emithru@gmail.com";
+const SUPPORT_EMAIL = "manojkumar.yeli@gmail.com";
 
 const roleLinks = {
   student: [
@@ -132,22 +130,9 @@ const Footer = () => {
         <Grid container spacing={2.5} alignItems="flex-start">
           <Grid item xs={12} md={3}>
             <Stack spacing={1}>
-              <Stack direction="row" spacing={1.2} alignItems="center">
-                <Box
-                  component="img"
-                  src={logo}
-                  alt="MSW logo"
-                  sx={{
-                    width: 36,
-                    height: 36,
-                    objectFit: "contain",
-                    borderRadius: "50%",
-                  }}
-                />
-                <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>
-                  MSW
-                </Typography>
-              </Stack>
+              <Typography variant="subtitle2" sx={{ fontWeight: 800 }}>
+                MSW
+              </Typography>
               <Typography variant="body2" color="text.secondary">
                 Student mentoring and success platform.
               </Typography>

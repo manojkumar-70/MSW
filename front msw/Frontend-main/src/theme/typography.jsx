@@ -2,7 +2,7 @@ import { pxToRem, responsiveFontSizes } from "../utils/getFontValue";
 
 // ----------------------------------------------------------------------
 
-const FONT_PRIMARY = "Source Sans Pro, sans-serif"; // Google Font
+const FONT_PRIMARY = "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
 // const FONT_SECONDARY = 'CircularStd, sans-serif'; // Local Font
 
 const typography = {

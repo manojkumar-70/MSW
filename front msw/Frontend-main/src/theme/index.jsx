@@ -31,7 +31,40 @@ export default function ThemeProvider({ children }) {
       palette: isLight ? palette.light : palette.dark,
       typography,
       breakpoints,
-      shape: { borderRadius: 8 },
+      shape: { borderRadius: 12 },
+      components: {
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              borderRadius: 10,
+              textTransform: "none",
+              fontWeight: 600,
+              boxShadow: "none",
+              "&:hover": {
+                boxShadow: "0 4px 12px rgba(79, 70, 229, 0.2)",
+              },
+            },
+          },
+        },
+        MuiCard: {
+          styleOverrides: {
+            root: {
+              borderRadius: 16,
+              border: isLight ? "1px solid #E2E8F0" : "1px solid #323C52",
+              boxShadow: isLight
+                ? "0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.04)"
+                : "0 4px 20px rgba(0, 0, 0, 0.25)",
+            },
+          },
+        },
+        MuiOutlinedInput: {
+          styleOverrides: {
+            root: {
+              borderRadius: 10,
+            },
+          },
+        },
+      },
       shadows: isLight ? shadows.light : shadows.dark,
       customShadows: isLight ? customShadows.light : customShadows.dark,
       utils: {

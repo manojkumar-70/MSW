@@ -23,10 +23,9 @@ import { useSnackbar } from "notistack";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
 import logger from "../utils/logger.js";
+import LoginIllustration from "../assets/illustration_login";
 
-const logo = "/campus_logo.png";
 const sidelogo = "/logo.svg";
-const Illustration = new URL("../public/login_illustration.png", import.meta.url).href;
 
 const Login = () => {
   const RELEASE_ANNOUNCEMENT_SESSION_KEY = "showMsw20Announcement";
@@ -116,12 +115,13 @@ const Login = () => {
             md={6}
             sx={{
               display: { xs: "none", md: "flex" },
-              backgroundImage: `url(${Illustration})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              borderRadius: "1rem",
+              alignItems: "center",
+              justifyContent: "center",
+              p: 4,
             }}
-          />
+          >
+            <LoginIllustration sx={{ width: "100%", maxWidth: 540 }} />
+          </Grid>
           <Grid
             item
             xs={12}
@@ -154,61 +154,42 @@ const Login = () => {
                 <Stack spacing={{ xs: 2.5, sm: 3 }} mb={3}>
                   <Box
                     display="flex"
-                    justifyContent="center"
+                    justifyContent="flex-start"
                     alignItems="center"
-                    mb={{ xs: 2, md: 4 }}
-                    gap={{ xs: 2.5, sm: 4, md: 8 }}
-                    flexWrap="wrap"
+                    mb={1}
                   >
                     <img
                       src={sidelogo}
-                      alt="Side Logo"
+                      alt="MSW Logo"
                       style={{
-                        width: "clamp(108px, 34vw, 140px)",
-                        filter: "none"
-                      }}
-                    />
-                    <img
-                      src={logo}
-                      alt="MSW logo"
-                      style={{
-                        width: "clamp(62px, 20vw, 80px)",
-                        filter: "none"
+                        width: "clamp(120px, 34vw, 150px)",
+                        filter: "none",
                       }}
                     />
                   </Box>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    color=""
-                    align="center"
-                    gutterBottom
-                    sx={{ fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" } }}
-                  >
-                    Sign in to MSW
-                  </Typography>
+                  <Box>
+                    <Typography
+                      variant="h4"
+                      component="h1"
+                      fontWeight={700}
+                      sx={{ fontSize: { xs: "1.75rem", sm: "2rem" }, mb: 0.75 }}
+                    >
+                      Welcome Back :)
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      To keep connected with us please login with your email address and password.
+                    </Typography>
+                  </Box>
                   <Box
                     sx={{
-                      display: { xs: "block", md: "none" },
+                      display: { xs: "flex", md: "none" },
+                      justifyContent: "center",
                       width: "100%",
-                      borderRadius: 2,
-                      overflow: "hidden",
                       mt: -0.5,
                       mb: 0.5,
                     }}
                   >
-                    <Image
-                      src={Illustration}
-                      alt="Login illustration"
-                      fit="cover"
-                      duration={0}
-                      shift="none"
-                      style={{
-                        width: "100%",
-                        height: "clamp(130px, 24vh, 180px)",
-                        borderRadius: "12px",
-                      }}
-                    />
+                    <LoginIllustration sx={{ width: "100%", maxWidth: 320 }} />
                   </Box>
                   <TextField
                     label="Email"
@@ -272,11 +253,12 @@ const Login = () => {
                     size="large"
                     fullWidth
                     disabled={isFetching}
+                    sx={{ borderRadius: 999, py: 1.4 }}
                     startIcon={
                       isFetching ? <CircularProgress size={20} /> : null
                     }
                   >
-                    {isFetching ? "Signing in..." : "Sign in"}
+                    {isFetching ? "Signing in..." : "Login Now"}
                   </Button>
                 </Stack>
 
