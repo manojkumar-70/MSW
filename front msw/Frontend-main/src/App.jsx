@@ -429,11 +429,7 @@ function App() {
                   <Route path="/faculty/FacultyProfile" element={<Navigate replace to="/faculty/profile" />} />
                   <Route
                     path="/notices"
-                    element={
-                      <LazyLoadWrapper>
-                        <Notices />
-                      </LazyLoadWrapper>
-                    }
+                    element={<LazyLoadWrapper component={Notices} />}
                   />
                   <Route
                     path="/settings"
