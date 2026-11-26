@@ -56,6 +56,7 @@ const Updates = lazy(() => import("./pages/Updates"));
 const Notices = lazy(() => import("./pages/Notices/Notices"));
 const Scholarships = lazy(() => import("./pages/Scholarships/Scholarships"));
 const Library = lazy(() => import("./pages/Library/Library"));
+const Grievance = lazy(() => import("./pages/Grievance/Grievance"));
 
 function App() {
   // Track page views on route change using Google Analytics GA4
@@ -440,6 +441,10 @@ function App() {
                   <Route
                     path="/library"
                     element={<LazyLoadWrapper component={Library} />}
+                  />
+                  <Route
+                    path="/grievance"
+                    element={<LazyLoadWrapper component={Grievance} />}
                   />
                   <Route
                     path="/settings"

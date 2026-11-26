@@ -1,6 +1,7 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -33,6 +34,7 @@ const HodNavConfig = [
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
+  { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -70,6 +72,7 @@ const adminNavConfig = [
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
+  { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -82,6 +85,7 @@ const facultyNavConfig = [
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
+  { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -94,6 +98,7 @@ const hodNavConfig = [
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
+  { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -107,6 +112,7 @@ const directorNavConfig = [
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
+  { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -119,6 +125,7 @@ const studentNavConfig = [
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
+  { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
