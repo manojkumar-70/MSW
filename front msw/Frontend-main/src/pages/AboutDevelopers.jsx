@@ -303,8 +303,7 @@ const AboutDevelopers = () => {
           </Paper>
 
           <Stack spacing={3}>
-            <TeamSection title="Founders" ids={developerGroups.founders} />
-            <TeamSection title="Other Developers" ids={developerGroups.others} />
+            <TeamSection title="" ids={developerGroups.founders} />
           </Stack>
         </Container>
       </Box>
