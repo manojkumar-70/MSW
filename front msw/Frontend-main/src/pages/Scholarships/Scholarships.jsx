@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   Box,
   Button,
@@ -6,7 +6,12 @@ import {
   CardContent,
   Chip,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
+  IconButton,
   InputAdornment,
   Stack,
   TextField,
@@ -16,16 +21,59 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useSnackbar } from "notistack";
 import Page from "../../components/Page";
 import api from "../../utils/axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const STATUS_FILTERS = ["All", "Open", "Closed"];
 
 export default function Scholarships() {
+  const { user } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
+  const canManage = ["admin", "hod", "director"].includes(user?.roleName);
   const [scholarships, setScholarships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("All");
   const [search, setSearch] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    provider: "",
+    eligibility: "",
+    amount: "",
+    deadline: "",
+    applyLink: "",
+  });
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    try {
+      setSubmitting(true);
+      await api.post("/scholarships", form);
+      enqueueSnackbar("Scholarship added", { variant: "success" });
+      setOpenModal(false);
+      setForm({ name: "", provider: "", eligibility: "", amount: "", deadline: "", applyLink: "" });
+      fetchScholarships();
+    } catch (err) {
+      enqueueSnackbar(err?.response?.data?.message || "Failed to add scholarship", { variant: "error" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/scholarships/${id}`);
+      enqueueSnackbar("Scholarship deleted", { variant: "success" });
+      setScholarships((prev) => prev.filter((s) => s._id !== id));
+    } catch {
+      enqueueSnackbar("Failed to delete scholarship", { variant: "error" });
+    }
+  };
 
   const fetchScholarships = async () => {
     try {
@@ -51,14 +99,21 @@ export default function Scholarships() {
   return (
     <Page title="Scholarships">
       <Container maxWidth="lg" sx={{ py: 3 }}>
-        <Box mb={3}>
-          <Typography variant="h4" fontWeight={700}>
-            Scholarship Information & Updates
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Explore active scholarships, eligibility criteria, and application deadlines
-          </Typography>
-        </Box>
+        <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ sm: "center" }} spacing={2} mb={3}>
+          <Box>
+            <Typography variant="h4" fontWeight={700}>
+              Scholarship Information & Updates
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Explore active scholarships, eligibility criteria, and application deadlines
+            </Typography>
+          </Box>
+          {canManage && (
+            <Button variant="contained" startIcon={<AddIcon />} onClick={() => setOpenModal(true)}>
+              Add Scholarship
+            </Button>
+          )}
+        </Stack>
 
         <Card sx={{ mb: 3 }}>
           <CardContent>
@@ -140,18 +195,25 @@ export default function Scholarships() {
                       <Typography variant="caption" color="text.disabled">
                         Deadline: {new Date(item.deadline).toLocaleDateString()}
                       </Typography>
-                      {item.applyLink && (
-                        <Button
-                          size="small"
-                          variant="outlined"
-                          endIcon={<OpenInNewIcon fontSize="small" />}
-                          href={item.applyLink}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Apply
-                        </Button>
-                      )}
+                      <Stack direction="row" spacing={1} alignItems="center">
+                        {item.applyLink && (
+                          <Button
+                            size="small"
+                            variant="outlined"
+                            endIcon={<OpenInNewIcon fontSize="small" />}
+                            href={item.applyLink}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Apply
+                          </Button>
+                        )}
+                        {canManage && (
+                          <IconButton size="small" color="error" onClick={() => handleDelete(item._id)}>
+                            <DeleteOutlineIcon fontSize="small" />
+                          </IconButton>
+                        )}
+                      </Stack>
                     </Stack>
                   </CardContent>
                 </Card>
@@ -159,6 +221,28 @@ export default function Scholarships() {
             ))}
           </Grid>
         )}
+
+        <Dialog open={openModal} onClose={() => setOpenModal(false)} fullWidth maxWidth="sm">
+          <form onSubmit={handleCreate}>
+            <DialogTitle>Add Scholarship</DialogTitle>
+            <DialogContent>
+              <Stack spacing={2} mt={1}>
+                <TextField label="Scholarship Name" required fullWidth value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                <TextField label="Provider" required fullWidth value={form.provider} onChange={(e) => setForm({ ...form, provider: e.target.value })} />
+                <TextField label="Amount (e.g., ₹25,000 / year)" required fullWidth value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} />
+                <TextField label="Eligibility Criteria" required fullWidth multiline rows={2} value={form.eligibility} onChange={(e) => setForm({ ...form, eligibility: e.target.value })} />
+                <TextField label="Deadline" type="date" required fullWidth InputLabelProps={{ shrink: true }} value={form.deadline} onChange={(e) => setForm({ ...form, deadline: e.target.value })} />
+                <TextField label="Application Link (optional)" fullWidth value={form.applyLink} onChange={(e) => setForm({ ...form, applyLink: e.target.value })} />
+              </Stack>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOpenModal(false)}>Cancel</Button>
+              <Button type="submit" variant="contained" disabled={submitting}>
+                {submitting ? "Saving..." : "Add Scholarship"}
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
       </Container>
     </Page>
   );
