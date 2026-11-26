@@ -68,7 +68,6 @@ const adminNavConfig = [
 const facultyNavConfig = [
   { text: "Home", icon: <HomeOutlinedIcon />, link: "/faculty/dashboard" },
   { text: "My Mentees", icon: <PeopleIcon />, link: "/mentees" },
-  { text: "Threads", icon: <QuestionAnswerOutlinedIcon />, link: "/threads" },
   // { text: "Meetings", icon: <EventOutlinedIcon />, link: "/meetings" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
@@ -79,7 +78,6 @@ const hodNavConfig = [
   { text: "Home", icon: <HomeOutlinedIcon />, link: "/hod/dashboard" },
   { text: "Department Mentors", icon: <PeopleIcon />, link: "/hod/mentors" },
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
-  { text: "Threads", icon: <QuestionAnswerOutlinedIcon />, link: "/threads" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
@@ -90,7 +88,6 @@ const directorNavConfig = [
   { text: "All Mentors", icon: <PeopleIcon />, link: "/director/mentors" },
   { text: "View Users", icon: <PeopleOutlinedIcon />, link: "/director/users" },
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
-  { text: "Threads", icon: <QuestionAnswerOutlinedIcon />, link: "/threads" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
@@ -98,7 +95,6 @@ const directorNavConfig = [
 
 const studentNavConfig = [
   { text: "Home", icon: <HomeOutlinedIcon />, link: "/" },
-  { text: "Threads", icon: <QuestionAnswerOutlinedIcon />, link: "/threads" },
   // { text: "Meetings", icon: <EventOutlinedIcon />, link: "/meetings" },
   { text: "Mentor Details", icon: <PersonOutlinedIcon />, link: "/mentor-details" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },

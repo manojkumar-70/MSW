@@ -399,7 +399,7 @@ const Report = () => {
   };
 
   return (
-    <Page title="Thread">
+    <Page title="Reports">
       <Container
         maxWidth="xl"
         sx={{ px: { xs: 1.5, sm: 3 }, overflowX: "hidden", overflowY: "auto" }}
@@ -439,7 +439,7 @@ const Report = () => {
                 mb: 1,
               }}
             >
-              Threads Report
+              Reports
             </Typography>
             
             <Typography 
@@ -447,7 +447,7 @@ const Report = () => {
               color="text.secondary"
               sx={{ maxWidth: 600, mx: 'auto' }}
             >
-              View and export thread data from your system
+              View and export data from your system
             </Typography>
           </Box>
 

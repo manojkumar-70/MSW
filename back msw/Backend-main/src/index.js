@@ -171,6 +171,10 @@ app.get('/test-upload', (req, res) => {
 
 swaggerDocs(app);
 
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "ok", message: "MSW Backend API is running" });
+});
+
 // Handle non-existing routes
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
