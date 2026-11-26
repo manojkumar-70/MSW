@@ -1,4 +1,5 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -29,6 +30,7 @@ const HodNavConfig = [
     link: "/hod/users" },
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
+  { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -64,6 +66,7 @@ const adminNavConfig = [
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
+  { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -74,6 +77,7 @@ const facultyNavConfig = [
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
+  { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -84,6 +88,7 @@ const hodNavConfig = [
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
+  { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -95,6 +100,7 @@ const directorNavConfig = [
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
+  { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -105,6 +111,7 @@ const studentNavConfig = [
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
+  { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
