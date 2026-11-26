@@ -1,11 +1,20 @@
 import { useEffect, useState, useContext } from "react";
 import {
   Box,
+  Button,
   Card,
   CardContent,
+  Checkbox,
   Chip,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  IconButton,
   InputAdornment,
+  MenuItem,
   Stack,
   TextField,
   Typography,
@@ -14,6 +23,9 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import PushPinIcon from "@mui/icons-material/PushPin";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useSnackbar } from "notistack";
 import Page from "../../components/Page";
 import api from "../../utils/axios";
 import { AuthContext } from "../../context/AuthContext";
@@ -30,10 +42,46 @@ const categoryColor = {
 
 export default function Notices() {
   const { user } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
+  const canManage = ["admin", "faculty", "hod", "director"].includes(user?.roleName);
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    category: "General",
+    isPinned: false,
+  });
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    try {
+      setSubmitting(true);
+      await api.post("/notices", form);
+      enqueueSnackbar("Notice posted", { variant: "success" });
+      setOpenModal(false);
+      setForm({ title: "", description: "", category: "General", isPinned: false });
+      fetchNotices();
+    } catch (err) {
+      enqueueSnackbar(err?.response?.data?.message || "Failed to post notice", { variant: "error" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/notices/${id}`);
+      enqueueSnackbar("Notice deleted", { variant: "success" });
+      setNotices((prev) => prev.filter((n) => n._id !== id));
+    } catch {
+      enqueueSnackbar("Failed to delete notice", { variant: "error" });
+    }
+  };
 
   const fetchNotices = async () => {
     try {
@@ -65,6 +113,15 @@ export default function Notices() {
               Official announcements, exam schedules, and campus circulars
             </Typography>
           </Box>
+          {canManage && (
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={() => setOpenModal(true)}
+            >
+              Post Notice
+            </Button>
+          )}
         </Stack>
 
         <Card sx={{ mb: 3 }}>
@@ -142,12 +199,76 @@ export default function Notices() {
                         {notice.createdBy?.name ? ` • ${notice.createdBy.name}` : ""}
                       </Typography>
                     </Box>
+                    {canManage && (
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={() => handleDelete(notice._id)}
+                        aria-label="Delete notice"
+                      >
+                        <DeleteOutlineIcon fontSize="small" />
+                      </IconButton>
+                    )}
                   </Stack>
                 </CardContent>
               </Card>
             ))}
           </Stack>
         )}
+
+        <Dialog open={openModal} onClose={() => setOpenModal(false)} fullWidth maxWidth="sm">
+          <form onSubmit={handleCreate}>
+            <DialogTitle>Post New Notice</DialogTitle>
+            <DialogContent>
+              <Stack spacing={2} mt={1}>
+                <TextField
+                  label="Title"
+                  required
+                  fullWidth
+                  value={form.title}
+                  onChange={(e) => setForm({ ...form, title: e.target.value })}
+                />
+                <TextField
+                  label="Category"
+                  select
+                  fullWidth
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                >
+                  {CATEGORIES.filter((c) => c !== "All").map((cat) => (
+                    <MenuItem key={cat} value={cat}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  label="Description"
+                  required
+                  fullWidth
+                  multiline
+                  rows={4}
+                  value={form.description}
+                  onChange={(e) => setForm({ ...form, description: e.target.value })}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={form.isPinned}
+                      onChange={(e) => setForm({ ...form, isPinned: e.target.checked })}
+                    />
+                  }
+                  label="Pin notice to top"
+                />
+              </Stack>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOpenModal(false)}>Cancel</Button>
+              <Button type="submit" variant="contained" disabled={submitting}>
+                {submitting ? "Posting..." : "Post Notice"}
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
       </Container>
     </Page>
   );
