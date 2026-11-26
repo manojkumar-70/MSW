@@ -1,5 +1,4 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
