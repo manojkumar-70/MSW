@@ -53,6 +53,7 @@ const MyChatBot = lazy(() => import("./mychatbot"));
 const AboutDevelopers = lazy(() => import("./pages/AboutDevelopers"));
 const DeveloperProfile = lazy(() => import("./pages/DeveloperProfile"));
 const Updates = lazy(() => import("./pages/Updates"));
+const Notices = lazy(() => import("./pages/Notices/Notices"));
 
 function App() {
   // Track page views on route change using Google Analytics GA4
@@ -426,6 +427,14 @@ function App() {
                     }
                   />
                   <Route path="/faculty/FacultyProfile" element={<Navigate replace to="/faculty/profile" />} />
+                  <Route
+                    path="/notices"
+                    element={
+                      <LazyLoadWrapper>
+                        <Notices />
+                      </LazyLoadWrapper>
+                    }
+                  />
                   <Route
                     path="/settings"
                     element={

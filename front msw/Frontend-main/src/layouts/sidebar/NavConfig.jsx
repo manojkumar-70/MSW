@@ -1,4 +1,5 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -28,6 +29,7 @@ const HodNavConfig = [
     icon: <PeopleOutlinedIcon />, 
     link: "/hod/users" },
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
+  { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -62,6 +64,7 @@ const adminNavConfig = [
   },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
+  { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -71,6 +74,7 @@ const facultyNavConfig = [
   // { text: "Meetings", icon: <EventOutlinedIcon />, link: "/meetings" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
+  { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -80,6 +84,7 @@ const hodNavConfig = [
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
+  { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -90,6 +95,7 @@ const directorNavConfig = [
   { text: "Reports", icon: <SummarizeOutlinedIcon />, link: "/report" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
+  { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -99,6 +105,7 @@ const studentNavConfig = [
   { text: "Mentor Details", icon: <PersonOutlinedIcon />, link: "/mentor-details" },
   { text: "Campus Buddy", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
+  { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
