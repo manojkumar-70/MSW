@@ -138,21 +138,6 @@ export default function Data() {
         />
       ),
     },
-    {
-      value: "Add TYL Marks",
-      icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
-      component: <AddTylMarks />,
-    },
-    {
-      value: "Add MOOC Details",
-      icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
-      component: <AddMoocDetails />,
-    },
-    {
-      value: "Add MiniProject Details",
-      icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
-      component: <AddMiniProjectDetails />,
-    },
   ];
   return (
     <Page title="User: Account Settings">
