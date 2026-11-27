@@ -24,6 +24,7 @@ import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import AddIcon from "@mui/icons-material/Add";
 import { useSnackbar } from "notistack";
+import { BrowserMultiFormatReader } from "@zxing/browser";
 import Page from "../../components/Page";
 import api from "../../utils/axios";
 import { AuthContext } from "../../context/AuthContext";
@@ -140,38 +141,21 @@ export default function Library() {
 
   useEffect(() => {
     if (!openCamera) return;
-    let stream;
-    let rafId;
-    let active = true;
+    const codeReader = new BrowserMultiFormatReader();
+    let controls;
 
     const startCamera = async () => {
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
         const video = document.getElementById("library-scanner-video");
         if (!video) return;
-        video.srcObject = stream;
-        await video.play();
-
-        if (!("BarcodeDetector" in window)) {
-          enqueueSnackbar("Camera barcode detection is not supported in this browser; please type the code.", { variant: "warning" });
-          return;
-        }
-        const detector = new window.BarcodeDetector();
-        const scanFrame = async () => {
-          if (!active) return;
-          try {
-            const barcodes = await detector.detect(video);
-            if (barcodes.length > 0 && barcodes[0].rawValue) {
-              setOpenCamera(false);
-              processScannedCode(barcodes[0].rawValue);
-              return;
-            }
-          } catch {
-            // ignore frame read errors
+        controls = await codeReader.decodeFromVideoDevice(undefined, video, (result) => {
+          if (result) {
+            const text = result.getText();
+            if (controls) controls.stop();
+            setOpenCamera(false);
+            processScannedCode(text);
           }
-          rafId = requestAnimationFrame(scanFrame);
-        };
-        rafId = requestAnimationFrame(scanFrame);
+        });
       } catch {
         enqueueSnackbar("Unable to access camera. Check browser permissions.", { variant: "error" });
         setOpenCamera(false);
@@ -180,9 +164,7 @@ export default function Library() {
 
     startCamera();
     return () => {
-      active = false;
-      if (rafId) cancelAnimationFrame(rafId);
-      if (stream) stream.getTracks().forEach((t) => t.stop());
+      if (controls) controls.stop();
     };
   }, [openCamera]);
 
