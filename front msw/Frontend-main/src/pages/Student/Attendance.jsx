@@ -31,6 +31,7 @@ const Attendance = () => {
   const [searchParams] = useSearchParams();
   const { semester: studentSemester, loading: semesterLoading } = useStudentSemester();
   const [attendanceData, setAttendanceData] = useState([]);
+  const [classAttendance, setClassAttendance] = useState([]);
   const [studentInfo, setStudentInfo] = useState({ usn: '', name: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -76,6 +77,13 @@ const Attendance = () => {
         }
       }
       
+      try {
+        const classRes = await api.get(`/class-attendance/student/${menteeId}`);
+        setClassAttendance(classRes.data?.data?.entries || []);
+      } catch {
+        setClassAttendance([]);
+      }
+
       const response = await api.get(`/students/attendance/${menteeId}`);
       
       logger.info("Attendance API response:", response.data); // Debug log
@@ -344,6 +352,40 @@ const Attendance = () => {
           </TableBody>
           </Table>
         </TableContainer>
+      )}
+
+      {classAttendance.length > 0 && (
+        <Paper sx={{ p: 2, mt: 3 }}>
+          <Typography variant="h6" fontWeight={700} mb={1.5}>
+            Class Attendance (Marked by Faculty)
+          </Typography>
+          <TableContainer>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Time Slot</TableCell>
+                  <TableCell>Subject</TableCell>
+                  <TableCell>Section</TableCell>
+                  <TableCell align="right">Status</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {classAttendance.map((row) => (
+                  <TableRow key={row._id}>
+                    <TableCell>{row.date}</TableCell>
+                    <TableCell>{row.timeSlot}</TableCell>
+                    <TableCell>{row.subject}</TableCell>
+                    <TableCell>{row.section}</TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 700, color: row.status === "P" ? "success.main" : "error.main" }}>
+                      {row.status === "P" ? "Present (P)" : "Absent (A)"}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       )}
     </Container>
   );

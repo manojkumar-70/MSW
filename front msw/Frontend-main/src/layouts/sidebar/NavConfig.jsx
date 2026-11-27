@@ -121,6 +121,7 @@ const studentNavConfig = [
   { text: "Home", icon: <HomeOutlinedIcon />, link: "/" },
   // { text: "Meetings", icon: <EventOutlinedIcon />, link: "/meetings" },
   { text: "Mentor Details", icon: <PersonOutlinedIcon />, link: "/mentor-details" },
+  { text: "Attendance", icon: <EventOutlinedIcon />, link: "/student/attendance" },
   { text: "MSW Assistant", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
   { text: "Notices", icon: <CampaignOutlinedIcon />, link: "/notices" },
