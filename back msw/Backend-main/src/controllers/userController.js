@@ -113,7 +113,9 @@ export async function createUser(req, res, next) {
       return next(new AppError("roleName is required but not provided", 400));
     }
 
-    const roleDoc = await Role.findById(role);
+    const roleDoc =
+      (role ? await Role.findById(role).catch(() => null) : null) ||
+      (await Role.findOne({ name: roleName }));
     if (!roleDoc) {
       return next(new AppError("Invalid role ID", 400));
     }
@@ -155,7 +157,9 @@ export const updateUser = catchAsync(async (req, res, next) => {
 
   // If role is being updated, fetch the new role name
   if (role) {
-    const roleDoc = await Role.findById(role);
+    const roleDoc =
+      (role ? await Role.findById(role).catch(() => null) : null) ||
+      (await Role.findOne({ name: roleName }));
     if (!roleDoc) {
       return next(new AppError("Invalid role ID", 400));
     }
