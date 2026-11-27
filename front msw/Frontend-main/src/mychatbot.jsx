@@ -112,8 +112,8 @@ const MyChatBot = () => {
 
   const helpOptions = [
     "Department Location",
-    "IAT dates",
-    "VTU Examinations",
+    "Internal dates",
+    "External Examinations",
     "Department HOD",
     "Other question",
   ];
@@ -144,7 +144,7 @@ const MyChatBot = () => {
       path: "repeat",
     },
     ask_iat_dates: {
-      message: "Please choose the IAT dates you want to know about:",
+      message: "Please choose the Internal dates you want to know about:",
       options: IAT_OPTIONS,
       path: "get_iat_dates",
     },

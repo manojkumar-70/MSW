@@ -33,16 +33,16 @@ const INITIAL_MESSAGES = [
 
 const quickOptions = [
   "Department Location",
-  "IAT dates",
-  "VTU Examinations",
+  "Internal dates",
+  "External Examinations",
   "Department HOD",
   "Other question",
 ];
 
 const quickOptionPrompts = {
   "Department Location": "Where is the department located on campus?",
-  "IAT dates": "What is the latest schedule information for the IAT exams?",
-  "VTU Examinations": "What is the latest information available for VTU examinations?",
+  "Internal dates": "What is the latest schedule information for the Internal exams?",
+  "External Examinations": "What is the latest information available for External examinations?",
   "Department HOD": "Who is the HOD of this department? Include name and designation if available.",
   "Other question": "Please ask your question and I will try to help you.",
 };
