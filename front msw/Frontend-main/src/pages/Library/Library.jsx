@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import AddIcon from "@mui/icons-material/Add";
 import { useSnackbar } from "notistack";
 import Page from "../../components/Page";
@@ -37,6 +38,7 @@ export default function Library() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [scanCode, setScanCode] = useState("");
   const [openAddBook, setOpenAddBook] = useState(false);
   const [issueBookTarget, setIssueBookTarget] = useState(null);
   const [bookForm, setBookForm] = useState({ title: "", author: "", isbn: "", category: "Social Work", totalCopies: 1 });
@@ -109,6 +111,28 @@ export default function Library() {
     }
   };
 
+  const handleScanSubmit = (e) => {
+    e.preventDefault();
+    const code = scanCode.trim();
+    if (!code) return;
+    const matchedBook = books.find(
+      (b) => b.isbn?.toLowerCase() === code.toLowerCase() || b._id === code
+    );
+    if (!matchedBook) {
+      setBookForm({ title: "", author: "", isbn: code, category: "Social Work", totalCopies: 1 });
+      setOpenAddBook(true);
+      enqueueSnackbar(`New serial "${code}" — fill details to add book`, { variant: "info" });
+    } else if (matchedBook.availableCopies > 0) {
+      setIssueBookTarget(matchedBook);
+      enqueueSnackbar(`Found "${matchedBook.title}" — ready to issue`, { variant: "success" });
+    } else {
+      setTab(1);
+      fetchIssues();
+      enqueueSnackbar(`"${matchedBook.title}" has 0 copies available — mark a copy returned`, { variant: "warning" });
+    }
+    setScanCode("");
+  };
+
   return (
     <Page title="Library">
       <Container maxWidth="lg" sx={{ py: 3 }}>
@@ -127,6 +151,34 @@ export default function Library() {
             </Button>
           )}
         </Stack>
+
+        {canManage && (
+          <Card sx={{ mb: 2.5 }}>
+            <CardContent sx={{ py: 1.5, "&:last-child": { pb: 1.5 } }}>
+              <form onSubmit={handleScanSubmit}>
+                <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} alignItems={{ sm: "center" }}>
+                  <TextField
+                    size="small"
+                    fullWidth
+                    placeholder="Scan or enter book serial / ISBN and press Enter..."
+                    value={scanCode}
+                    onChange={(e) => setScanCode(e.target.value)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <QrCodeScannerIcon fontSize="small" color="primary" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button type="submit" variant="outlined" sx={{ whiteSpace: "nowrap" }}>
+                    Scan / Lookup
+                  </Button>
+                </Stack>
+              </form>
+            </CardContent>
+          </Card>
+        )}
 
         {canManage && (
           <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>

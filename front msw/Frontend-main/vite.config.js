@@ -25,6 +25,17 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: PORT,
+      proxy: {
+        "/api": {
+          target: "http://localhost:3000",
+          changeOrigin: true,
+        },
+        "/socket.io": {
+          target: "http://localhost:3000",
+          ws: true,
+          changeOrigin: true,
+        },
+      },
       headers: {
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
