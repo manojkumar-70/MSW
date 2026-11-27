@@ -39,6 +39,7 @@ export default function Library() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [scanCode, setScanCode] = useState("");
+  const [openCamera, setOpenCamera] = useState(false);
   const [openAddBook, setOpenAddBook] = useState(false);
   const [issueBookTarget, setIssueBookTarget] = useState(null);
   const [bookForm, setBookForm] = useState({ title: "", author: "", isbn: "", category: "Social Work", totalCopies: 1 });
@@ -111,9 +112,8 @@ export default function Library() {
     }
   };
 
-  const handleScanSubmit = (e) => {
-    e.preventDefault();
-    const code = scanCode.trim();
+  const processScannedCode = (rawCode) => {
+    const code = rawCode.trim();
     if (!code) return;
     const matchedBook = books.find(
       (b) => b.isbn?.toLowerCase() === code.toLowerCase() || b._id === code
@@ -132,6 +132,59 @@ export default function Library() {
     }
     setScanCode("");
   };
+
+  const handleScanSubmit = (e) => {
+    e.preventDefault();
+    processScannedCode(scanCode);
+  };
+
+  useEffect(() => {
+    if (!openCamera) return;
+    let stream;
+    let rafId;
+    let active = true;
+
+    const startCamera = async () => {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        const video = document.getElementById("library-scanner-video");
+        if (!video) return;
+        video.srcObject = stream;
+        await video.play();
+
+        if (!("BarcodeDetector" in window)) {
+          enqueueSnackbar("Camera barcode detection is not supported in this browser; please type the code.", { variant: "warning" });
+          return;
+        }
+        const detector = new window.BarcodeDetector();
+        const scanFrame = async () => {
+          if (!active) return;
+          try {
+            const barcodes = await detector.detect(video);
+            if (barcodes.length > 0 && barcodes[0].rawValue) {
+              setOpenCamera(false);
+              processScannedCode(barcodes[0].rawValue);
+              return;
+            }
+          } catch {
+            // ignore frame read errors
+          }
+          rafId = requestAnimationFrame(scanFrame);
+        };
+        rafId = requestAnimationFrame(scanFrame);
+      } catch {
+        enqueueSnackbar("Unable to access camera. Check browser permissions.", { variant: "error" });
+        setOpenCamera(false);
+      }
+    };
+
+    startCamera();
+    return () => {
+      active = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (stream) stream.getTracks().forEach((t) => t.stop());
+    };
+  }, [openCamera]);
 
   return (
     <Page title="Library">
@@ -172,7 +225,16 @@ export default function Library() {
                     }}
                   />
                   <Button type="submit" variant="outlined" sx={{ whiteSpace: "nowrap" }}>
-                    Scan / Lookup
+                    Lookup
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="contained"
+                    startIcon={<QrCodeScannerIcon />}
+                    onClick={() => setOpenCamera(true)}
+                    sx={{ whiteSpace: "nowrap" }}
+                  >
+                    Scan Camera
                   </Button>
                 </Stack>
               </form>
@@ -299,6 +361,21 @@ export default function Library() {
             )}
           </Stack>
         )}
+
+        <Dialog open={openCamera} onClose={() => setOpenCamera(false)} fullWidth maxWidth="xs">
+          <DialogTitle>Scan Book Barcode / QR</DialogTitle>
+          <DialogContent>
+            <Box sx={{ width: "100%", borderRadius: 2, overflow: "hidden", bgcolor: "black" }}>
+              <video id="library-scanner-video" style={{ width: "100%", display: "block" }} muted playsInline />
+            </Box>
+            <Typography variant="caption" color="text.secondary" display="block" mt={1}>
+              Point your camera at the book's ISBN barcode or QR code.
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenCamera(false)}>Close</Button>
+          </DialogActions>
+        </Dialog>
 
         <Dialog open={openAddBook} onClose={() => setOpenAddBook(false)} fullWidth maxWidth="sm">
           <form onSubmit={handleAddBook}>
