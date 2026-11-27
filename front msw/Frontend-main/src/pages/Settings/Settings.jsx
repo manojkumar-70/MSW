@@ -169,6 +169,26 @@ export default function Settings() {
         Settings
       </Typography>
 
+      <Card sx={{ p: 3, maxWidth: 600, mx: "auto", mb: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          Profile Photo
+        </Typography>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Avatar src={avatarUrl} sx={{ width: 64, height: 64 }}>
+            {user?.name?.charAt(0)?.toUpperCase() || "U"}
+          </Avatar>
+          <Stack direction="row" spacing={1}>
+            <Button variant="contained" component="label" size="small" disabled={photoLoading}>
+              Upload Photo
+              <input type="file" hidden accept="image/*" onChange={handlePhotoUpload} />
+            </Button>
+            <Button variant="outlined" color="error" size="small" onClick={handlePhotoRemove} disabled={photoLoading}>
+              Remove
+            </Button>
+          </Stack>
+        </Stack>
+      </Card>
+
       <Card sx={{ p: 3, maxWidth: 600, mx: "auto" }}>
         <Typography variant="h6" gutterBottom>
           Change Password
