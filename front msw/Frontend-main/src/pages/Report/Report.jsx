@@ -15,16 +15,20 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
+  InputAdornment,
   Typography,
   CircularProgress,
 } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
+import SearchIcon from "@mui/icons-material/Search";
 import ExcelJS from "exceljs";
 import Page from "../../components/Page";
 import api from "../../utils/axios";
 
 export default function Report() {
   const [tab, setTab] = useState(0);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [notices, setNotices] = useState([]);
   const [scholarships, setScholarships] = useState([]);
@@ -117,6 +121,17 @@ export default function Report() {
     URL.revokeObjectURL(url);
   };
 
+  const q = search.trim().toLowerCase();
+  const filteredNotices = q
+    ? notices.filter((n) => n.title?.toLowerCase().includes(q) || n.category?.toLowerCase().includes(q))
+    : notices;
+  const filteredScholarships = q
+    ? scholarships.filter((s) => s.name?.toLowerCase().includes(q) || s.provider?.toLowerCase().includes(q) || s.status?.toLowerCase().includes(q))
+    : scholarships;
+  const filteredBooks = q
+    ? books.filter((b) => b.title?.toLowerCase().includes(q) || b.author?.toLowerCase().includes(q) || b.category?.toLowerCase().includes(q))
+    : books;
+
   return (
     <Page title="Reports">
       <Container maxWidth="lg" sx={{ py: 3 }}>
@@ -134,11 +149,27 @@ export default function Report() {
           </Button>
         </Stack>
 
-        <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
-          <Tab label={`Notices (${notices.length})`} />
-          <Tab label={`Scholarships (${scholarships.length})`} />
-          <Tab label={`Library (${books.length})`} />
-        </Tabs>
+        <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ sm: "center" }} spacing={2} mb={2}>
+          <Tabs value={tab} onChange={(_, v) => setTab(v)}>
+            <Tab label={`Notices (${filteredNotices.length})`} />
+            <Tab label={`Scholarships (${filteredScholarships.length})`} />
+            <Tab label={`Library (${filteredBooks.length})`} />
+          </Tabs>
+          <TextField
+            size="small"
+            placeholder="Search current report..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            sx={{ minWidth: { sm: 260 } }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Stack>
 
         <Card>
           <CardContent>
@@ -160,7 +191,7 @@ export default function Report() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {notices.map((n) => (
+                        {filteredNotices.map((n) => (
                           <TableRow key={n._id}>
                             <TableCell>{n.title}</TableCell>
                             <TableCell><Chip size="small" label={n.category} /></TableCell>
@@ -183,7 +214,7 @@ export default function Report() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {scholarships.map((s) => (
+                        {filteredScholarships.map((s) => (
                           <TableRow key={s._id}>
                             <TableCell>{s.name}</TableCell>
                             <TableCell>{s.provider}</TableCell>
@@ -206,7 +237,7 @@ export default function Report() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {books.map((b) => (
+                        {filteredBooks.map((b) => (
                           <TableRow key={b._id}>
                             <TableCell>{b.title}</TableCell>
                             <TableCell>{b.author}</TableCell>
