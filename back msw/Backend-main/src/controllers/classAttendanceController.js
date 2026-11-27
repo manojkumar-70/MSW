@@ -66,3 +66,24 @@ export const getAttendanceHistory = catchAsync(async (req, res) => {
   const history = await ClassAttendance.find().sort({ date: -1, createdAt: -1 }).limit(30);
   res.status(200).json({ status: "success", results: history.length, data: { history } });
 });
+
+export const getStudentClassAttendance = catchAsync(async (req, res) => {
+  const { studentId } = req.params;
+  const sessions = await ClassAttendance.find({ "records.student": studentId })
+    .sort({ date: -1, createdAt: -1 })
+    .lean();
+
+  const entries = sessions.map((s) => {
+    const rec = s.records.find((r) => String(r.student) === String(studentId));
+    return {
+      _id: s._id,
+      date: s.date,
+      timeSlot: s.timeSlot,
+      subject: s.subject,
+      section: s.section,
+      status: rec?.status || "P",
+    };
+  });
+
+  res.status(200).json({ status: "success", results: entries.length, data: { entries } });
+});
