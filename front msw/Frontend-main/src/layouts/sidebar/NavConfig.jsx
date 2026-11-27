@@ -79,6 +79,7 @@ const adminNavConfig = [
 const facultyNavConfig = [
   { text: "Home", icon: <HomeOutlinedIcon />, link: "/faculty/dashboard" },
   { text: "My Mentees", icon: <PeopleIcon />, link: "/mentees" },
+  { text: "Take Attendance", icon: <EventOutlinedIcon />, link: "/faculty/take-attendance" },
   // { text: "Meetings", icon: <EventOutlinedIcon />, link: "/meetings" },
   { text: "MSW Assistant", icon: <HdrStrongIcon />, link: "/campus-buddy" },
   { text: "What's New", icon: <CampaignOutlinedIcon />, link: "/updates" },
