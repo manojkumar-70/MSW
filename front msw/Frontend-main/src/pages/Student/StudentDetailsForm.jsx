@@ -404,6 +404,17 @@ export default function StudentDetailsForm({ colorMode, menteeId, isAdminEdit })
             <Typography variant="caption" sx={{ mt: 2, display: 'block', color: 'text.secondary' }}>
               Allowed formats: JPG, PNG, GIF. Max size: 3MB
             </Typography>
+            {watch('studentProfile.photo') && (
+              <Button
+                variant="outlined"
+                color="error"
+                size="small"
+                sx={{ mt: 1.5 }}
+                onClick={() => setValue('studentProfile.photo', '', { shouldDirty: true })}
+              >
+                Remove Photo
+              </Button>
+            )}
           </Card>
         </Grid>
 
