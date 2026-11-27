@@ -27,11 +27,11 @@ const studentProfileSchema = new Schema({
   },
   sem: {
     type: Number,
-    required: true,
+    required: false,
   },
   usn: { 
     type: String,
-    required: true 
+    required: false 
   },
   personalEmail: { 
     type: String 
