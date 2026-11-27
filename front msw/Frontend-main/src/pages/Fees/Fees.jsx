@@ -13,6 +13,8 @@ import {
   Grid,
   MenuItem,
   Stack,
+  Tab,
+  Tabs,
   TextField,
   Typography,
   CircularProgress,
@@ -33,6 +35,7 @@ export default function Fees() {
   const canManage = ["admin", "faculty", "hod", "director"].includes(user?.roleName);
 
   const [fees, setFees] = useState([]);
+  const [tab, setTab] = useState(0);
   const [loading, setLoading] = useState(true);
   const [openAdd, setOpenAdd] = useState(false);
   const [payTarget, setPayTarget] = useState(null);
@@ -95,6 +98,8 @@ export default function Fees() {
 
   const totalPending = fees.filter((f) => f.status === "Pending").reduce((sum, f) => sum + f.amount, 0);
   const totalPaid = fees.filter((f) => f.status === "Paid").reduce((sum, f) => sum + f.amount, 0);
+  const tabCategories = [null, "Academic", "Exam", "Library Fine"];
+  const visibleFees = tabCategories[tab] ? fees.filter((f) => f.category === tabCategories[tab]) : fees;
 
   return (
     <Page title="Fees & Fines">
@@ -134,11 +139,18 @@ export default function Fees() {
           </Grid>
         </Grid>
 
+        <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2.5 }}>
+          <Tab label={`All (${fees.length})`} />
+          <Tab label={`Academic Fees (${fees.filter((f) => f.category === "Academic").length})`} />
+          <Tab label={`Exam Fees (${fees.filter((f) => f.category === "Exam").length})`} />
+          <Tab label={`Library / Lab Penalty (${fees.filter((f) => f.category === "Library Fine").length})`} />
+        </Tabs>
+
         {loading ? (
           <Box display="flex" justifyContent="center" py={6}>
             <CircularProgress />
           </Box>
-        ) : fees.length === 0 ? (
+        ) : visibleFees.length === 0 ? (
           <Card>
             <CardContent sx={{ textAlign: "center", py: 6 }}>
               <ReceiptLongIcon sx={{ fontSize: 48, color: "text.disabled", mb: 1 }} />
@@ -147,7 +159,7 @@ export default function Fees() {
           </Card>
         ) : (
           <Stack spacing={2}>
-            {fees.map((fee) => (
+            {visibleFees.map((fee) => (
               <Card key={fee._id}>
                 <CardContent>
                   <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ sm: "center" }} spacing={2}>
