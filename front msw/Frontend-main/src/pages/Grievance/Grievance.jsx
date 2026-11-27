@@ -77,7 +77,7 @@ export default function Grievance() {
         <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ sm: "center" }} spacing={2} mb={3}>
           <Box>
             <Typography variant="h4" fontWeight={700}>
-              Student Grievance & Support
+              Grievance & Support
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Submit campus grievances, track resolution status, and get institutional support
