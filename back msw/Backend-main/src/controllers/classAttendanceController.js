@@ -1,18 +1,42 @@
 import ClassAttendance from "../models/ClassAttendance.js";
 import User from "../models/User.js";
+import StudentProfile from "../models/Student/Profile.js";
 import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/appError.js";
 
 export const getStudentsForAttendance = catchAsync(async (req, res) => {
   const { section, department } = req.query;
-  const filter = { roleName: "student" };
-  if (section && section !== "All") {
-    filter.section = section;
-  }
+  const users = await User.find({ roleName: "student" })
+    .select("_id name email usn department sem section")
+    .sort({ name: 1 })
+    .lean();
+
+  const profiles = await StudentProfile.find({
+    userId: { $in: users.map((u) => u._id) },
+  })
+    .select("userId usn department sem section")
+    .lean();
+
+  const profileMap = new Map(profiles.map((p) => [String(p.userId), p]));
+
+  let students = users.map((u) => {
+    const p = profileMap.get(String(u._id));
+    return {
+      ...u,
+      usn: p?.usn || u.usn || "",
+      department: p?.department || u.department || "",
+      sem: p?.sem || u.sem || "",
+      section: p?.section || u.section || "",
+    };
+  });
+
   if (department && department !== "All") {
-    filter.department = department;
+    students = students.filter((s) => s.department === department);
   }
-  const students = await User.find(filter).select("_id name email usn department sem section").sort({ name: 1 });
+  if (section && section !== "All") {
+    students = students.filter((s) => s.section === section);
+  }
+
   res.status(200).json({ status: "success", results: students.length, data: { students } });
 });
 
