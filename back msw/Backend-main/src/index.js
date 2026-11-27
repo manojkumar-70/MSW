@@ -59,6 +59,7 @@ import noticeRoutes from "./routes/noticeRoutes.js";
 import scholarshipRoutes from "./routes/scholarshipRoutes.js";
 import libraryRoutes from "./routes/libraryRoutes.js";
 import classAttendanceRoutes from "./routes/classAttendanceRoutes.js";
+import feeRoutes from "./routes/feeRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -165,6 +166,7 @@ app.use("/api/notices", noticeRoutes);
 app.use("/api/scholarships", scholarshipRoutes);
 app.use("/api/library", libraryRoutes);
 app.use("/api/class-attendance", classAttendanceRoutes);
+app.use("/api/fees", feeRoutes);
 
 // Serve the test HTML file
 app.get('/test-upload', (req, res) => {
