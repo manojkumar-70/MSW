@@ -41,7 +41,7 @@ export default function ThemeProvider({ children }) {
               fontWeight: 600,
               boxShadow: "none",
               "&:hover": {
-                boxShadow: "0 4px 14px rgba(124, 58, 237, 0.24)",
+                boxShadow: "0 4px 14px rgba(5, 150, 105, 0.24)",
               },
             },
           },
