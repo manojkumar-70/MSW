@@ -429,6 +429,9 @@ export default function UserForm({ editingUser }) {
                     },
                   }}
                 >
+                  {methods.watch("role") === "student" && (
+                    <RHFTextField name="usn" label="USN" fullWidth />
+                  )}
                 </Box>
 
                 <Divider />
@@ -472,6 +475,9 @@ export default function UserForm({ editingUser }) {
                     autoComplete="new-password"
                     disabled={!!editingUser}
                   />
+                  {methods.watch("role") === "student" && (
+                    <RHFTextField name="usn" label="USN" fullWidth />
+                  )}
                 </Box>
 
                 <Box
@@ -499,6 +505,9 @@ export default function UserForm({ editingUser }) {
                   >
                     {editingUser ? "Update" : "Save"}
                   </LoadingButton>
+                  {methods.watch("role") === "student" && (
+                    <RHFTextField name="usn" label="USN" fullWidth />
+                  )}
                 </Box>
               </Stack>
             </Card>
