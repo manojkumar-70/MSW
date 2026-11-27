@@ -8,8 +8,9 @@ export default function ViewUsers() {
 
   const handleEdit = (user) => {
     if (user.roleName === "student") {
-      // Navigate to student profile with admin edit mode
       navigate(`/student/profile/${user._id}?adminEdit=true`);
+    } else {
+      navigate("/admin/add-user", { state: { editingUser: user } });
     }
   };
 
