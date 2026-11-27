@@ -295,6 +295,22 @@ export default function UserForm({ editingUser }) {
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      {!editingUser && (
+        <Stack direction="row" spacing={1.5} mb={2.5}>
+          <Button
+            variant={methods.watch("role") === "student" ? "contained" : "outlined"}
+            onClick={() => methods.setValue("role", "student")}
+          >
+            Add Student
+          </Button>
+          <Button
+            variant={methods.watch("role") === "faculty" ? "contained" : "outlined"}
+            onClick={() => methods.setValue("role", "faculty")}
+          >
+            Add Faculty
+          </Button>
+        </Stack>
+      )}
       <Card sx={{ boxShadow: 1 }}>
         <Grid
           container
