@@ -423,15 +423,6 @@ export default function UserForm({ editingUser }) {
                     },
                   }}
                 >
-                  <RHFSelect name="sem" label="Semester" fullWidth>
-                    <option value="">Select Semester</option>
-                    {semesterOptions.map((sem) => (
-                      <option key={sem} value={sem.toString()}>
-                        {sem}
-                      </option>
-                    ))}
-                  </RHFSelect>
-                  <RHFTextField name="usn" label="USN" fullWidth />
                 </Box>
 
                 <Divider />
