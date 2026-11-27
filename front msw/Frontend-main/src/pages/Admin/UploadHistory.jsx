@@ -45,9 +45,6 @@ const TAB_LABELS = {
   "add-attendance": "Add Attendance",
   "add-iat-marks": "Add IAT Marks",
   "add-external-marks": "Add External Marks",
-  "add-tyl-marks": "Add TYL Marks",
-  "add-mooc-details": "Add MOOC Details",
-  "add-mini-project-details": "Add Mini Project Details",
 };
 
 const STATUS_COLORS = {
