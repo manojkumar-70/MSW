@@ -34,11 +34,13 @@ const TIME_SLOTS = [
 ];
 
 const SECTIONS = ["All", "A", "B", "C"];
+const CLASSES = ["All", "CSE", "ISE", "AIML", "AIDS", "ECE", "MBA", "MCA", "MSW"];
 
 export default function TakeAttendance() {
   const { enqueueSnackbar } = useSnackbar();
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [timeSlot, setTimeSlot] = useState(TIME_SLOTS[0]);
+  const [department, setDepartment] = useState("All");
   const [section, setSection] = useState("All");
   const [subject, setSubject] = useState("Social Work");
   const [students, setStudents] = useState([]);
@@ -50,7 +52,7 @@ export default function TakeAttendance() {
     const fetchStudents = async () => {
       try {
         setLoading(true);
-        const res = await api.get("/class-attendance/students", { params: { section } });
+        const res = await api.get("/class-attendance/students", { params: { section, department } });
         const list = res.data?.data?.students || [];
         setStudents(list);
         const initial = {};
@@ -65,7 +67,7 @@ export default function TakeAttendance() {
       }
     };
     fetchStudents();
-  }, [section]);
+  }, [section, department]);
 
   const toggleStatus = (studentId, status) => {
     setAttendanceMap((prev) => ({ ...prev, [studentId]: status }));
@@ -126,24 +128,31 @@ export default function TakeAttendance() {
         <Card sx={{ mb: 3 }}>
           <CardContent>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={3}>
+              <Grid item xs={12} sm={6} md={2.4}>
                 <TextField label="Date" type="date" fullWidth size="small" InputLabelProps={{ shrink: true }} value={date} onChange={(e) => setDate(e.target.value)} />
               </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              <Grid item xs={12} sm={6} md={2.4}>
                 <TextField label="Time Slot" select fullWidth size="small" value={timeSlot} onChange={(e) => setTimeSlot(e.target.value)}>
                   {TIME_SLOTS.map((slot) => (
                     <MenuItem key={slot} value={slot}>{slot}</MenuItem>
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              <Grid item xs={12} sm={6} md={2.4}>
+                <TextField label="Class" select fullWidth size="small" value={department} onChange={(e) => setDepartment(e.target.value)}>
+                  {CLASSES.map((cls) => (
+                    <MenuItem key={cls} value={cls}>{cls}</MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6} md={2.4}>
                 <TextField label="Section" select fullWidth size="small" value={section} onChange={(e) => setSection(e.target.value)}>
                   {SECTIONS.map((sec) => (
                     <MenuItem key={sec} value={sec}>{sec}</MenuItem>
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              <Grid item xs={12} sm={6} md={2.4}>
                 <TextField label="Subject" fullWidth size="small" value={subject} onChange={(e) => setSubject(e.target.value)} />
               </Grid>
             </Grid>

@@ -4,10 +4,13 @@ import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/appError.js";
 
 export const getStudentsForAttendance = catchAsync(async (req, res) => {
-  const { section } = req.query;
+  const { section, department } = req.query;
   const filter = { roleName: "student" };
   if (section && section !== "All") {
     filter.section = section;
+  }
+  if (department && department !== "All") {
+    filter.department = department;
   }
   const students = await User.find(filter).select("_id name email usn department sem section").sort({ name: 1 });
   res.status(200).json({ status: "success", results: students.length, data: { students } });
