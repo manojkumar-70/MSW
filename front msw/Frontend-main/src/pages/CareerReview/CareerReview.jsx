@@ -95,16 +95,6 @@ export default function CareerReview() {
         component: <ProfessionalBodiesSection />,
       },
       {
-        value: "Mooc Courses",
-        icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
-        component: <Mooc />,
-      },
-      {
-        value: "Mini Project",
-        icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
-        component: <MiniProject />,
-      },
-      {
         value: "Activity",
         icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
         component: <Activity />,
