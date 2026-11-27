@@ -107,9 +107,7 @@ const Attendance = () => {
       setLoading(false);
     } catch (err) {
       logger.error("Attendance fetch error:", err); // Debug log
-      if (classEntries.length === 0) {
-        setError("Failed to fetch attendance data");
-      }
+      // No legacy semester attendance yet; class attendance will still render if present
       setLoading(false);
     }
   }, [semesterLoading, searchParams, user, studentSemester]);
