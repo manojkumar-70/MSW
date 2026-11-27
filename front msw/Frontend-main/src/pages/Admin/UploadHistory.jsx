@@ -101,6 +101,28 @@ const formatJson = (value) => {
   }
 };
 
+const downloadFailedRowsCsv = (session) => {
+  const rows = session?.failedRows || session?.errors || [];
+  if (!rows.length) return;
+  const headers = ["Row", "Error", "Data"];
+  const csvLines = [
+    headers.join(","),
+    ...rows.map((r, idx) => {
+      const rowNum = r.row ?? idx + 1;
+      const msg = String(r.error || r.message || "Failed").replace(/"/g, '""');
+      const data = JSON.stringify(r.data || r).replace(/"/g, '""');
+      return `${rowNum},"${msg}","${data}"`;
+    }),
+  ];
+  const blob = new Blob([csvLines.join("\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `upload-errors-${session.tabType || "session"}-${session._id}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
 export default function UploadHistory() {
   const theme = useTheme();
   const isLight = theme.palette.mode === "light";
@@ -414,6 +436,19 @@ export default function UploadHistory() {
                                 </Button>
                               </span>
                             </Tooltip>
+
+                            {(session.failedCount > 0 || (session.failedRows && session.failedRows.length > 0)) && (
+                              <Tooltip title="Download failed rows CSV">
+                                <Button
+                                  size="small"
+                                  color="error"
+                                  variant="outlined"
+                                  onClick={() => downloadFailedRowsCsv(session)}
+                                >
+                                  Errors CSV
+                                </Button>
+                              </Tooltip>
+                            )}
 
                             <Tooltip title="Restore this upload session">
                               <span>
