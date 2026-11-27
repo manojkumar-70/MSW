@@ -17,7 +17,6 @@ export const getAllNotices = catchAsync(async (req, res) => {
   }
 
   const notices = await Notice.find(filter)
-    .populate("createdBy", "name email roleName")
     .sort({ isPinned: -1, createdAt: -1 });
 
   res.status(200).json({
