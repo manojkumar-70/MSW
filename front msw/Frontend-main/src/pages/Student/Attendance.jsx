@@ -105,7 +105,9 @@ const Attendance = () => {
       setLoading(false);
     } catch (err) {
       logger.error("Attendance fetch error:", err); // Debug log
-      setError("Failed to fetch attendance data");
+      if (!classRes?.data?.data?.entries?.length) {
+        setError("Failed to fetch attendance data");
+      }
       setLoading(false);
     }
   }, [semesterLoading, searchParams, user, studentSemester]);
