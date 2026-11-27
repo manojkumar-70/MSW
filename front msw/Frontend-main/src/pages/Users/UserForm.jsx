@@ -149,7 +149,7 @@ export default function UserForm({ editingUser }) {
           password: formData.password,
           passwordConfirm: formData.passwordConfirm,
           // avatar: avatar ? avatar.name || avatar : "",
-          role: roleId,
+          ...(roleId ? { role: roleId } : {}),
           roleName: formData.role, // Use roleName instead of role ID
         };
         if (avatar && (typeof avatar === "string" || avatar.name)) {
