@@ -196,7 +196,7 @@ export default function Scholarships() {
                         Deadline: {new Date(item.deadline).toLocaleDateString()}
                       </Typography>
                       <Stack direction="row" spacing={1} alignItems="center">
-                        {item.applyLink && (
+                        {item.applyLink && user?.roleName === "student" && (
                           <Button
                             size="small"
                             variant="outlined"

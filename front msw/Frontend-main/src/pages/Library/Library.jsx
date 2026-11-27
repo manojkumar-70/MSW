@@ -32,7 +32,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Library() {
   const { user } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
-  const canManage = ["admin", "hod", "director"].includes(user?.roleName);
+  const canManage = ["admin", "hod", "director", "faculty"].includes(user?.roleName);
 
   const [tab, setTab] = useState(0);
   const [books, setBooks] = useState([]);
