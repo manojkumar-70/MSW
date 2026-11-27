@@ -112,7 +112,13 @@ export default function UserForm({ editingUser }) {
     const fetchRoleId = async () => {
       try {
         const response = await api.get(`/roles/${methods.getValues("role")}`);
-        setRoleId(response.data._id); // Store the ObjectId
+        const resolvedRoleId =
+          response.data?._id ||
+          response.data?.data?._id ||
+          response.data?.data?.role?._id ||
+          response.data?.role?._id ||
+          "";
+        setRoleId(resolvedRoleId);
       } catch (error) {
         logger.error("Failed to fetch role ID:", error);
         enqueueSnackbar("Failed to fetch role information", {
