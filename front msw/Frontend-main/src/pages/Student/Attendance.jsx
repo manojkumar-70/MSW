@@ -77,9 +77,11 @@ const Attendance = () => {
         }
       }
       
+      let classEntries = [];
       try {
         const classRes = await api.get(`/class-attendance/student/${menteeId}`);
-        setClassAttendance(classRes.data?.data?.entries || []);
+        classEntries = classRes.data?.data?.entries || [];
+        setClassAttendance(classEntries);
       } catch {
         setClassAttendance([]);
       }
@@ -105,7 +107,7 @@ const Attendance = () => {
       setLoading(false);
     } catch (err) {
       logger.error("Attendance fetch error:", err); // Debug log
-      if (!classRes?.data?.data?.entries?.length) {
+      if (classEntries.length === 0) {
         setError("Failed to fetch attendance data");
       }
       setLoading(false);
