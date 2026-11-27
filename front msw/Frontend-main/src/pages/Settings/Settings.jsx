@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {
+  Avatar,
   Box,
   Card,
   Stack,
@@ -16,10 +17,48 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Settings() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [photoLoading, setPhotoLoading] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState(user?.avatar || user?.photo || "");
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !user?._id) return;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        setPhotoLoading(true);
+        const base64 = reader.result;
+        await api.patch(`/users/${user._id}`, { avatar: base64 });
+        setAvatarUrl(base64);
+        dispatch?.({ type: "LOGIN_SUCCESS", payload: { ...user, avatar: base64 } });
+        enqueueSnackbar("Profile photo updated", { variant: "success" });
+      } catch {
+        enqueueSnackbar("Failed to update profile photo", { variant: "error" });
+      } finally {
+        setPhotoLoading(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handlePhotoRemove = async () => {
+    if (!user?._id) return;
+    try {
+      setPhotoLoading(true);
+      await api.patch(`/users/${user._id}`, { avatar: "" });
+      setAvatarUrl("");
+      dispatch?.({ type: "LOGIN_SUCCESS", payload: { ...user, avatar: "" } });
+      enqueueSnackbar("Profile photo removed", { variant: "success" });
+    } catch {
+      enqueueSnackbar("Failed to remove profile photo", { variant: "error" });
+    } finally {
+      setPhotoLoading(false);
+    }
+  };
   const [hardReloading, setHardReloading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
