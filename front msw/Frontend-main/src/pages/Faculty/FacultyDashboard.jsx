@@ -181,14 +181,6 @@ const FacultyDashboard = () => {
                 link="/mentees"
               />
             </Grid>
-            
-            <Grid item xs={12} sm={6} md={isLight ? 6 : 6} lg={isLight ? 4 : 4}>
-              <StudentTile
-                title="Threads"
-                icon={<QuestionAnswerIcon />}
-                link="/threads"
-              />
-            </Grid>
             <Grid item xs={12} sm={6} md={6} lg={4}>
               <StudentTile
                 title="Mentor-Mentee Conversation"
@@ -208,7 +200,7 @@ const FacultyDashboard = () => {
             
             <Grid item xs={12} sm={6} md={isLight ? 6 : 6} lg={isLight ? 4 : 4}>
               <StudentTile
-                title="Campus Buddy"
+                title="MSW Assistant"
                 icon={<HdrStrongIcon />}
                 link="/campus-buddy"
               />
