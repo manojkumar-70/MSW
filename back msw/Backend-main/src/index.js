@@ -177,6 +177,16 @@ app.get('/test-upload', (req, res) => {
 
 swaggerDocs(app);
 
+app.get("/api/admin/upload-history", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      sessions: [],
+      summary: { total: 0, success: 0, partial: 0, failed: 0, restored: 0 },
+    },
+  });
+});
+
 app.get("/", (req, res) => {
   res.status(200).json({ status: "ok", message: "MSW Backend API is running" });
 });
