@@ -18,7 +18,7 @@ export default function ScoreCard() {
   
   const ACCOUNT_TABS = [
     {
-      value: "Iat",
+      value: "Internal",
       icon: <Iconify icon={"ic:round-account-box"} width={20} height={20} />,
       component: <Iat/>,
     },
