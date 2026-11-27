@@ -199,24 +199,6 @@ const Dashboard = () => {
                 link="/student/attendance"
               />
             </Grid>
-            
-
-            
-            <Grid item xs={12} sm={6} md={isLight ? 6 : 6} lg={isLight ? 4 : 4}>
-              <StudentTile
-                title="PO Attainment"
-                icon={<AnalyticsIcon />}
-                link="/po-attainment-grading"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={isLight ? 6 : 6} lg={isLight ? 4 : 4}>
-              <StudentTile
-                title="TYL Scorecard"
-                icon={<AssignmentIcon />}
-                link="/student/tyl-scorecard"
-              />
-            </Grid>
           </Grid>
         </Container>
       </Box>
