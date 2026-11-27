@@ -2,6 +2,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -35,6 +36,7 @@ const HodNavConfig = [
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
   { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
+  { text: "Fees", icon: <PaymentOutlinedIcon />, link: "/fees" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -73,6 +75,7 @@ const adminNavConfig = [
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
   { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
+  { text: "Fees", icon: <PaymentOutlinedIcon />, link: "/fees" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -87,6 +90,7 @@ const facultyNavConfig = [
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
   { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
+  { text: "Fees", icon: <PaymentOutlinedIcon />, link: "/fees" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -100,6 +104,7 @@ const hodNavConfig = [
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
   { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
+  { text: "Fees", icon: <PaymentOutlinedIcon />, link: "/fees" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -114,6 +119,7 @@ const directorNavConfig = [
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
   { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
+  { text: "Fees", icon: <PaymentOutlinedIcon />, link: "/fees" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
@@ -128,6 +134,7 @@ const studentNavConfig = [
   { text: "Scholarships", icon: <SchoolOutlinedIcon />, link: "/scholarships" },
   { text: "Library", icon: <MenuBookOutlinedIcon />, link: "/library" },
   { text: "Grievance", icon: <SupportAgentOutlinedIcon />, link: "/grievance" },
+  { text: "Fees", icon: <PaymentOutlinedIcon />, link: "/fees" },
   { text: "Settings", icon: <SettingsOutlinedIcon />, link: "/settings" },
 ];
 
