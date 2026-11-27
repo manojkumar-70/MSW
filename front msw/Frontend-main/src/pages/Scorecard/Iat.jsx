@@ -75,7 +75,7 @@ const Iat = () => {
 
       setLoading(false);
     } catch (err) {
-      setError("Failed to fetch IAT data");
+      setError("Failed to fetch Internal data");
       setLoading(false);
       logger.error(err); // Log the error for debugging
     }
@@ -123,7 +123,7 @@ const Iat = () => {
   return (
     <Container maxWidth="lg" sx={{ px: { xs: 1.5, sm: 3 }, py: { xs: 2, sm: 3 } }}>
       <Typography variant={isSmDown ? "h5" : "h4"} component="h1" gutterBottom align="center">
-        IAT Marks Report
+        Internal Marks Report
       </Typography>
 
       <Stack direction={{ xs: "column", sm: "row" }} sx={{ mb: 2, justifyContent: "center" }}>
